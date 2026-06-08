@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workshop "Bản Thiết Kế Sự Sống" — Miễn phí cho người trẻ</title>
+<meta name="description" content="Một hành trình miễn phí cho người trẻ: nếu cả vũ trụ được thiết kế có chủ đích, thì bạn cũng vậy. Bạn không phải một tai nạn — bạn được thiết kế.">
+<style>
+  :root{
+    --bg:#070a1f;
+    --bg2:#0e1430;
+    --bg3:#1a2350;
+    --gold:#f5c451;
+    --gold2:#ffd97a;
+    --text:#eef2ff;
+    --muted:#aab4d8;
+    --card:rgba(255,255,255,0.05);
+    --border:rgba(255,255,255,0.12);
+    --radius:20px;
+    --maxread:720px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:
+      linear-gradient(180deg, rgba(7,10,31,.90), rgba(7,10,31,.94)),
+      url('hinh-nen.jpg') center top / cover no-repeat fixed,
+      var(--bg);
+    color:var(--text);
+    line-height:1.75;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{line-height:1.22;font-weight:800;letter-spacing:-0.01em}
+  p{color:var(--text)}
+  .container{max-width:980px;margin:0 auto;padding:0 22px}
+  .narrow{max-width:var(--maxread);margin-left:auto;margin-right:auto}
+  .gold{color:var(--gold)}
+  .muted{color:var(--muted)}
+  section{padding:84px 0;position:relative}
+  .center{text-align:center}
+  .eyebrow{display:block;text-transform:uppercase;letter-spacing:.18em;font-size:.78rem;
+    font-weight:700;color:var(--gold);margin-bottom:16px;opacity:.9}
+
+  /* Reveal on scroll */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* Buttons */
+  .btn{
+    display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold2));
+    color:#1a1300;font-weight:800;text-decoration:none;
+    padding:17px 38px;border-radius:50px;font-size:1.08rem;
+    box-shadow:0 10px 34px rgba(245,196,81,.38);
+    transition:transform .2s ease, box-shadow .2s ease;border:none;cursor:pointer;
+  }
+  .btn:hover{transform:translateY(-3px);box-shadow:0 18px 46px rgba(245,196,81,.55)}
+  .btn-sub{display:block;font-size:.85rem;color:#d7def5;margin-top:14px}
+  .btn-note{display:inline-block;font-size:.88rem;color:#cdd6f5;margin-top:16px;font-weight:600}
+
+  /* Image slots */
+  .figwrap{margin:42px auto;max-width:860px;position:relative}
+  .pic{width:100%;display:block;border-radius:var(--radius);border:1px solid var(--border);
+    box-shadow:0 26px 70px rgba(0,0,0,.55);object-fit:cover}
+  .pic-glow{position:relative}
+  .pic-glow:after{content:"";position:absolute;inset:-2px;border-radius:var(--radius);
+    box-shadow:0 0 70px rgba(120,90,230,.25) inset;pointer-events:none}
+  .pic-ph{width:100%;min-height:240px;border:2px dashed var(--border);border-radius:var(--radius);
+    background:var(--card);color:var(--muted);display:flex;align-items:center;justify-content:center;
+    text-align:center;padding:26px;font-size:.95rem;line-height:1.6}
+  .figcap{text-align:center;color:var(--muted);font-size:.86rem;margin-top:12px;font-style:italic}
+
+  /* Story prose */
+  .story p{font-size:1.16rem;color:#dfe5ff;margin-bottom:22px}
+  .story p.big{font-size:1.5rem;font-weight:700;color:#fff;line-height:1.45}
+  .story .whisper{border-left:3px solid var(--gold);padding:6px 0 6px 22px;
+    font-style:italic;color:var(--muted);font-size:1.18rem;margin:30px 0}
+
+  /* HERO */
+  .hero{
+    min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+    text-align:center;
+    background:
+      radial-gradient(circle at 20% 18%, rgba(120,80,220,.38), transparent 46%),
+      radial-gradient(circle at 82% 72%, rgba(40,90,200,.32), transparent 46%),
+      linear-gradient(180deg,#060818,#0d1734);
+    position:relative;overflow:hidden;
+  }
+  .stars{position:absolute;inset:0;background-image:
+    radial-gradient(1.5px 1.5px at 20% 30%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 60% 70%, #fff, transparent),
+    radial-gradient(1px 1px at 50% 20%, #fff, transparent),
+    radial-gradient(1px 1px at 80% 40%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 35% 80%, #fff, transparent),
+    radial-gradient(1px 1px at 90% 85%, #fff, transparent),
+    radial-gradient(1px 1px at 10% 60%, #fff, transparent),
+    radial-gradient(1px 1px at 45% 55%, #fff, transparent);
+    opacity:.5;animation:twinkle 6s ease-in-out infinite alternate}
+  @keyframes twinkle{from{opacity:.25}to{opacity:.7}}
+  .hero .container{position:relative;z-index:2}
+  .badge{
+    display:inline-block;border:1px solid var(--border);background:var(--card);
+    color:var(--gold);padding:8px 20px;border-radius:50px;font-size:.85rem;
+    font-weight:700;margin-bottom:28px;letter-spacing:.02em}
+  .ws-kicker{text-transform:uppercase;letter-spacing:.32em;font-size:.9rem;font-weight:700;
+    color:var(--muted);margin-bottom:14px}
+  .ws-title{font-size:clamp(2.7rem,9vw,5.2rem);line-height:1.05;margin-bottom:24px;font-weight:900;
+    color:var(--gold2);letter-spacing:-0.01em;
+    text-shadow:0 0 44px rgba(245,196,81,.38), 0 2px 6px rgba(0,0,0,.35)}
+  .hero-hook{font-size:clamp(1.2rem,3.2vw,1.9rem);font-weight:700;color:#fff;
+    max-width:780px;margin:0 auto 22px;line-height:1.45;text-wrap:balance}
+  .hero h1{font-size:clamp(2.05rem,6vw,3.5rem);margin-bottom:22px}
+  .hero p.lead{font-size:clamp(1.08rem,2.6vw,1.4rem);color:#cdd6f5;max-width:660px;margin:0 auto 38px;text-wrap:balance}
+  .scroll-hint{margin-top:50px;color:var(--muted);font-size:.85rem;animation:bob 2s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+  /* PAIN */
+  .pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:42px}
+  .pain-card{background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
+    border:1px solid var(--border);border-radius:var(--radius);padding:26px 24px;
+    transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease}
+  .pain-card:hover{transform:translateY(-5px);border-color:rgba(245,196,81,.5);
+    box-shadow:0 20px 44px rgba(0,0,0,.45)}
+  .pain-card .badge-ico{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;
+    justify-content:center;font-size:1.5rem;margin-bottom:16px;
+    background:radial-gradient(circle at 30% 30%, rgba(245,196,81,.28), rgba(120,90,230,.18));
+    border:1px solid var(--border)}
+  .pain-card p{color:#dde3ff;font-size:1.02rem;line-height:1.6}
+
+  /* TURN */
+  .turn{background:linear-gradient(180deg,rgba(20,16,48,.6),rgba(7,10,31,0));text-align:center}
+  .turn h2{font-size:clamp(1.6rem,4.6vw,2.5rem);max-width:820px;margin:0 auto;line-height:1.4}
+  .turn .quote-line{width:64px;height:4px;background:var(--gold);margin:28px auto;border-radius:4px}
+
+  /* ARGUMENT data chips */
+  .arg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:40px 0}
+  .arg-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:24px 18px;text-align:center;transition:transform .25s ease,border-color .25s ease}
+  .arg-item:hover{transform:translateY(-4px);border-color:rgba(245,196,81,.45)}
+  .arg-item .num{font-size:2rem;font-weight:900;color:var(--gold)}
+  .arg-item .lbl{font-size:.92rem;color:var(--muted);margin-top:8px;line-height:1.5}
+
+  /* REVEAL climax */
+  .climax{text-align:center;background:
+    radial-gradient(circle at 50% 40%, rgba(245,196,81,.10), transparent 60%)}
+  .climax .big-reveal{font-size:clamp(1.8rem,5.5vw,3rem);font-weight:900;line-height:1.3;
+    max-width:840px;margin:0 auto}
+  .climax .sub{font-size:1.2rem;color:#cdd6f5;margin-top:24px;max-width:680px;margin-left:auto;margin-right:auto}
+
+  /* BENEFITS */
+  .ben-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:42px}
+  .ben{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 26px;
+    transition:transform .25s ease,border-color .25s ease}
+  .ben:hover{transform:translateY(-4px);border-color:rgba(245,196,81,.45)}
+  .ben .em{font-size:1.7rem;display:block;margin-bottom:10px}
+  .ben h3{color:var(--gold);font-size:1.16rem;margin-bottom:8px}
+  .ben p{color:var(--muted)}
+
+  /* ROADMAP */
+  .road .step{display:flex;gap:22px;align-items:flex-start;padding:24px 0;border-bottom:1px solid var(--border)}
+  .road .step:last-child{border-bottom:none}
+  .road .dot{flex:0 0 48px;height:48px;width:48px;border-radius:50%;
+    background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1300;
+    font-weight:900;display:flex;align-items:center;justify-content:center;font-size:1.15rem;
+    box-shadow:0 8px 22px rgba(245,196,81,.3)}
+  .road .step h3{font-size:1.16rem;margin-bottom:4px}
+  .road .step p{color:var(--muted)}
+
+  /* FORMAT */
+  .fmt-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:38px}
+  .fmt{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:30px 26px;text-align:center;
+    transition:transform .25s ease,border-color .25s ease}
+  .fmt:hover{transform:translateY(-4px);border-color:rgba(245,196,81,.45)}
+  .fmt .em{font-size:2.1rem}
+  .fmt h3{margin:12px 0 6px;color:var(--gold)}
+  .free-tag{display:inline-block;margin-top:34px;background:rgba(245,196,81,.12);
+    border:1px solid var(--gold);color:var(--gold);padding:11px 24px;border-radius:50px;font-weight:700}
+
+  /* FOR WHOM */
+  .whom ul{list-style:none;max-width:700px;margin:32px auto 0}
+  .whom li{padding:15px 0 15px 40px;position:relative;font-size:1.08rem;border-bottom:1px solid var(--border)}
+  .whom li:before{content:"✓";position:absolute;left:0;top:13px;color:var(--gold);font-weight:900;font-size:1.2rem}
+
+  /* TRUST */
+  .trust{text-align:center}
+  .trust .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:38px 30px;max-width:720px;margin:0 auto}
+  .trust .card p:first-child{font-size:1.18rem;color:#e6ebff;font-style:italic;line-height:1.7}
+
+  /* FAQ */
+  details{background:var(--card);border:1px solid var(--border);border-radius:14px;
+    margin-bottom:14px;padding:0 22px;overflow:hidden}
+  summary{cursor:pointer;padding:18px 0;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  summary::-webkit-details-marker{display:none}
+  summary:after{content:"+";color:var(--gold);font-size:1.5rem;font-weight:400;flex:0 0 auto}
+  details[open] summary:after{content:"–"}
+  details p{color:var(--muted);padding:0 0 18px}
+
+  /* FORM / CTA */
+  .signup{background:linear-gradient(180deg,rgba(10,17,48,.4),rgba(7,10,31,.7));text-align:center}
+  .signup h2{font-size:clamp(1.7rem,5vw,2.7rem);margin-bottom:14px}
+  form{max-width:480px;margin:36px auto 0;text-align:left}
+  .field{margin-bottom:16px}
+  label{display:block;font-size:.9rem;color:var(--muted);margin-bottom:7px;font-weight:600}
+  input,select{width:100%;padding:14px 16px;border-radius:12px;border:1px solid var(--border);
+    background:rgba(255,255,255,.06);color:var(--text);font-size:1rem;font-family:inherit}
+  input::placeholder{color:#7d88b3}
+  input:focus,select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(245,196,81,.15)}
+  form .btn{width:100%;margin-top:8px}
+  .success{display:none;background:rgba(80,200,120,.12);border:1px solid #59c87a;
+    color:#bff5cf;padding:24px;border-radius:14px;margin-top:24px;font-weight:600}
+
+  footer{padding:46px 0;text-align:center;color:var(--muted);font-size:.9rem;border-top:1px solid var(--border)}
+
+  @media(max-width:640px){
+    section{padding:60px 0}
+    .pain-grid,.ben-grid,.fmt-grid{grid-template-columns:1fr}
+    .arg{grid-template-columns:1fr}
+    .story p{font-size:1.08rem}
+    .story p.big{font-size:1.28rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="stars"></div>
+  <div class="container">
+    <span class="badge">★ WORKSHOP MIỄN PHÍ · PHI LỢI NHUẬN</span>
+    <div class="ws-kicker">— Workshop —</div>
+    <h1 class="ws-title">Bản Thiết Kế Sự Sống</h1>
+    <p class="hero-hook">Có những đêm bạn nằm thức,<br><span class="gold">tự hỏi mình tồn tại để làm gì.</span></p>
+    <p class="lead">Nếu câu hỏi đó từng khiến bạn lặng đi — thì buổi Workshop này dành cho bạn. Một buổi ngắn, miễn phí, dành cho người trẻ đang đi tìm lại chính mình.</p>
+    <a href="#dangky" class="btn">Mình muốn bắt đầu hành trình</a>
+    <span class="btn-note">✦ 100% miễn phí · Không bán hàng · Không ép buộc</span>
+    <div class="scroll-hint">↓ Mình kể bạn nghe một chuyện</div>
+  </div>
+</header>
+
+<!-- STORY: opening scene -->
+<section class="story">
+  <div class="container narrow">
+    <span class="eyebrow reveal">Chuyện của rất nhiều người trẻ</span>
+    <p class="big reveal">Đã bao giờ, giữa một thành phố sáng đèn, bạn thấy mình lạc lõng nhất?</p>
+    <p class="reveal">Ban ngày bạn vẫn cười, vẫn trả lời "ổn mà". Nhưng đến tối, khi mọi tiếng ồn lắng xuống, có một cảm giác trống rỗng len lén quay về. Bạn cuộn điện thoại thêm một chút, để khỏi phải đối diện với câu hỏi mà mình không biết trả lời thế nào.</p>
+    <div class="figwrap reveal pic-glow">
+      <img src="hinh-hero.jpg" alt="Người trẻ ngồi một mình ngắm dải Ngân Hà trên nóc nhà giữa thành phố" class="pic" style="max-height:440px"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <div class="pic-ph" style="display:none">📷 Ảnh HERO — lưu file tên <b>&nbsp;hinh-hero.jpg&nbsp;</b> cùng thư mục với trang này (ảnh người ngồi ngắm sao trên nóc nhà · tỷ lệ 16:9)</div>
+    </div>
+    <p class="whisper reveal">"Mọi người ai cũng tiến về phía trước. Còn mình thì sao?"</p>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section class="pain">
+  <div class="container">
+    <h2 class="center narrow reveal">Có thể bạn nhận ra mình ở đâu đó trong những điều này…</h2>
+    <div class="pain-grid">
+      <div class="pain-card reveal"><div class="badge-ico">📱</div><p>Bạn cuộn mạng xã hội và thấy ai cũng giỏi hơn, thành công hơn — còn mình thì như đang tụt lại phía sau.</p></div>
+      <div class="pain-card reveal"><div class="badge-ico">💼</div><p>Bạn làm việc đến kiệt sức, nhưng trong lòng vẫn trống rỗng và không biết mình đang đi về đâu.</p></div>
+      <div class="pain-card reveal"><div class="badge-ico">🏠</div><p>Áp lực từ gia đình, kỳ vọng của xã hội, câu hỏi "bao giờ ổn định?" khiến bạn nhiều lúc ngộp thở.</p></div>
+      <div class="pain-card reveal"><div class="badge-ico">💔</div><p>Những tổn thương trong tình cảm, sự cô đơn, cảm giác chẳng ai thật sự hiểu hay lắng nghe mình.</p></div>
+      <div class="pain-card reveal"><div class="badge-ico">😟</div><p>Lo âu, mất ngủ, tự trách bản thân, sợ thất bại và sợ một ngày bị bỏ lại phía sau.</p></div>
+      <div class="pain-card reveal"><div class="badge-ico">🌫️</div><p>Và câu hỏi lớn nhất vẫn chưa có lời đáp: <em>"Rốt cuộc mình sống để làm gì?"</em></p></div>
+    </div>
+    <p class="center muted narrow reveal" style="margin-top:36px;font-size:1.08rem">Nếu bạn gật đầu dù chỉ với một điều — bạn không hề kỳ lạ, và bạn không hề một mình.</p>
+  </div>
+</section>
+
+<!-- TURN -->
+<section class="turn">
+  <div class="container">
+    <div class="quote-line reveal"></div>
+    <h2 class="reveal">Nhưng nếu vấn đề <span class="gold">không phải vì bạn kém cỏi</span> — mà chỉ vì bạn chưa từng được thấy <span class="gold">bản thiết kế gốc</span> của cuộc đời mình thì sao?</h2>
+    <div class="quote-line reveal"></div>
+  </div>
+</section>
+
+<!-- ABOUT / ARGUMENT -->
+<section class="about story">
+  <div class="container">
+    <div class="narrow">
+      <span class="eyebrow reveal center" style="text-align:center">Một góc nhìn khác</span>
+      <h2 class="center reveal" style="font-size:clamp(1.7rem,4.6vw,2.5rem);margin-bottom:20px">Hãy thử nhìn lại một điều rất quen</h2>
+      <p class="reveal">Một chiếc ô tô có hơn <strong>20.000</strong> linh kiện. Một chiếc máy bay Boeing có gần <strong>6 triệu</strong> bộ phận. Chưa ai từng thấy chúng tự ráp lại thành xe, thành máy bay — vì đằng sau mỗi chi tiết đều có một <span class="gold">bản thiết kế</span> và một người thiết kế.</p>
+    </div>
+
+    <div class="figwrap reveal pic-glow">
+      <img src="hinh-vutru.jpg" alt="Trái Đất xanh giữa vũ trụ bao la với ánh mặt trời" class="pic" style="max-height:440px"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <div class="pic-ph" style="display:none">📷 Ảnh VŨ TRỤ / TRÁI ĐẤT — lưu file tên <b>&nbsp;hinh-vutru.jpg&nbsp;</b> (tỷ lệ 16:9)</div>
+    </div>
+
+    <div class="arg">
+      <div class="arg-item reveal"><div class="num">~200 tỷ</div><div class="lbl">ngôi sao chỉ trong dải Ngân Hà của chúng ta</div></div>
+      <div class="arg-item reveal"><div class="num">149,6 tr km</div><div class="lbl">khoảng cách Trái Đất – Mặt Trời, vừa đủ để có sự sống</div></div>
+      <div class="arg-item reveal"><div class="num">0–100°C</div><div class="lbl">khoảng nhiệt hẹp để nước ở thể lỏng — và Trái Đất nằm đúng trong đó</div></div>
+    </div>
+
+    <div class="narrow">
+      <p class="reveal">Trái Đất nằm đúng khoảng cách để không quá nóng, không quá lạnh. Nước tồn tại ở thể lỏng. Bầu khí quyển và từ trường che chắn cho ta khỏi tia bức xạ. Mọi hằng số vật lý được "căn chỉnh" tinh tế đến mức chỉ lệch một chút thôi — là sự sống biến mất.</p>
+      <p class="whisper reveal">Tất cả những điều đó, thật sự chỉ là ngẫu nhiên sao?</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLIMAX / REVEAL -->
+<section class="climax">
+  <div class="container">
+    <p class="big-reveal reveal">Nếu cả vũ trụ được thiết kế có chủ đích — <span class="gold">thì bạn cũng vậy.</span></p>
+    <p class="sub reveal">Bạn không phải một tai nạn ngẫu nhiên. Bạn được tạo nên có lý do, có giá trị và một mục đích mà có lẽ bạn chưa từng được kể cho nghe.</p>
+  </div>
+</section>
+
+<!-- BRIDGE: why it matters → the workshop -->
+<section class="story">
+  <div class="container narrow">
+    <span class="eyebrow reveal">Điều thay đổi tất cả</span>
+    <h2 class="reveal" style="font-size:clamp(1.7rem,4.6vw,2.5rem);margin-bottom:20px">Khi bạn nhìn thấy bản thiết kế của đời mình</h2>
+    <p class="reveal">Một linh kiện nằm lẻ loi thì vô nghĩa. Nhưng đặt đúng vào bản thiết kế, nó trở thành một mắt xích của cỗ máy vận hành kỳ diệu. Con người cũng vậy: khi biết mình được thiết kế cho điều gì, ta thôi thấy đời mình rời rạc — ta biết mình là ai, đang đi đâu và sống vì điều gì.</p>
+    <p class="whisper reveal">"Nếu cuộc đời mình thật sự có một bản thiết kế gốc — mình muốn được nhìn thấy nó."</p>
+    <p class="reveal" style="font-size:1.18rem;color:#eef2ff">Đó là lý do Workshop <strong class="gold">"Bản Thiết Kế Sự Sống"</strong> ra đời — để cùng bạn đi tìm bản thiết kế cho chính cuộc đời mình.</p>
+  </div>
+</section>
+
+<!-- WORKSHOP CONTENT -->
+<section class="road">
+  <div class="container">
+    <span class="eyebrow center reveal" style="text-align:center;display:block">Trong buổi Workshop</span>
+    <h2 class="center reveal">Bạn sẽ cùng khám phá 4 điều</h2>
+    <p class="center muted reveal" style="margin-bottom:24px">Nhẹ nhàng, dễ theo, không cần bất kỳ kiến thức nền tảng nào.</p>
+    <div class="step reveal"><div class="dot">1</div><div><h3>Vũ trụ này có ngẫu nhiên không?</h3><p>Khám phá trật tự kỳ diệu của vũ trụ và sự sống quanh ta.</p></div></div>
+    <div class="step reveal"><div class="dot">2</div><div><h3>Trái Đất — hành tinh của kì tích</h3><p>Những điều kiện hoàn hảo đến khó tin để bạn và tôi có thể tồn tại.</p></div></div>
+    <div class="step reveal"><div class="dot">3</div><div><h3>Bản thiết kế của chính bạn</h3><p>Bạn được tạo nên có mục đích — và điều đó thay đổi cách bạn nhìn về mình.</p></div></div>
+    <div class="step reveal"><div class="dot">4</div><div><h3>Sống đúng với thiết kế ấy</h3><p>Biến hiểu biết thành bình an và động lực thật trong đời sống mỗi ngày.</p></div></div>
+    <p class="center muted reveal" style="margin-top:20px;font-size:.95rem">Toàn bộ Workshop được thiết kế dành riêng cho thanh niên và người trẻ — gần gũi, dễ tiếp nhận, không lý thuyết khô khan.</p>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits">
+  <div class="container">
+    <span class="eyebrow center reveal" style="text-align:center;display:block">Điều bạn mang về</span>
+    <h2 class="center reveal">Sau buổi Workshop, bạn có thể…</h2>
+    <div class="ben-grid">
+      <div class="ben reveal"><span class="em">🌿</span><h3>Thôi so sánh bản thân</h3><p>Hiểu rằng giá trị của bạn không nằm ở lượt like, mức lương hay "con nhà người ta".</p></div>
+      <div class="ben reveal"><span class="em">🧭</span><h3>Tìm lại mục đích & động lực</h3><p>Có một điểm tựa rõ ràng để biết mình là ai và đang sống vì điều gì.</p></div>
+      <div class="ben reveal"><span class="em">🕊️</span><h3>Bình an hơn trong lòng</h3><p>Nhẹ nhõm hơn trước kỳ vọng của gia đình và những áp lực vô hình từ xã hội.</p></div>
+      <div class="ben reveal"><span class="em">🤝</span><h3>Không còn thấy một mình</h3><p>Một cộng đồng người trẻ cùng chật vật, cùng đi tìm câu trả lời và đồng hành với nhau.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMAT -->
+<section class="format">
+  <div class="container center">
+    <h2 class="reveal">Bạn học như thế nào?</h2>
+    <p class="muted reveal">Chọn cách phù hợp nhất với mình — đơn giản và thoải mái.</p>
+    <div class="fmt-grid">
+      <div class="fmt reveal"><div class="em">💻</div><h3>Online</h3><p class="muted">Tham gia từ xa qua các buổi học trực tuyến — ở đâu cũng học được, chỉ cần một chiếc điện thoại.</p></div>
+      <div class="fmt reveal"><div class="em">🤝</div><h3>Offline</h3><p class="muted">Gặp gỡ trực tiếp, kết nối và chia sẻ cùng một cộng đồng người trẻ ấm áp.</p></div>
+    </div>
+    <div class="free-tag reveal">🎁 Hoàn toàn miễn phí — món quà gửi đến cộng đồng</div>
+  </div>
+</section>
+
+<!-- FOR WHOM -->
+<section class="whom">
+  <div class="container center">
+    <h2 class="reveal">Workshop này dành cho bạn, nếu…</h2>
+    <p class="muted reveal narrow" style="margin-top:14px">Dù bạn đang chật vật tìm lối ra, hay đang vững bước theo đuổi thành công — bản thiết kế cho cuộc đời mình vẫn là điều ai cũng cần.</p>
+    <ul>
+      <li class="reveal">Bạn là người trẻ và đang cảm thấy mất phương hướng.</li>
+      <li class="reveal">Bạn mệt mỏi vì áp lực công việc, gia đình, tình cảm, đồng trang lứa.</li>
+      <li class="reveal">Bạn đang khao khát thành công và muốn phát triển bản thân mỗi ngày.</li>
+      <li class="reveal">Bạn ham học hỏi, muốn xây một nền tảng vững vàng để đi thật xa.</li>
+      <li class="reveal">Bạn muốn hiểu rõ giá trị và mục đích sống của chính mình.</li>
+      <li class="reveal">Bạn đang tìm một cộng đồng tích cực, an toàn để được lắng nghe.</li>
+    </ul>
+    <div class="figwrap reveal pic-glow" style="max-width:760px">
+      <img src="hinh-hyvong.jpg" alt="Nhóm bạn trẻ mỉm cười bên nhau hướng về ánh bình minh" class="pic" style="max-height:400px"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <div class="pic-ph" style="display:none">📷 Ảnh HY VỌNG / CỘNG ĐỒNG — lưu file tên <b>&nbsp;hinh-hyvong.jpg&nbsp;</b> (tỷ lệ 16:9)</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST / INSTRUCTOR -->
+<section class="trust">
+  <div class="container">
+    <span class="eyebrow reveal">Tấm lòng của chúng mình</span>
+    <h2 class="reveal" style="margin-bottom:30px">Vì sao chúng mình mở Workshop này?</h2>
+    <div class="card reveal">
+      <p>"Chúng mình từng đi qua những ngày chật vật, hoang mang và tự hỏi rất nhiều về ý nghĩa cuộc sống. Khi tìm được câu trả lời, chúng mình muốn trao lại điều đó như một món quà — miễn phí, không điều kiện — để thêm một người trẻ nữa tìm thấy bình an và hy vọng."</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="container narrow">
+    <h2 class="center reveal" style="margin-bottom:30px">Một vài điều bạn có thể đang thắc mắc</h2>
+    <details class="reveal"><summary>Workshop có mất phí không?</summary><p>Hoàn toàn miễn phí. Đây là một dự án phi lợi nhuận, được thực hiện với mong muốn lan toả giá trị tích cực cho cộng đồng.</p></details>
+    <details class="reveal"><summary>Mình có bị ép buộc hay bị mời mua gì không?</summary><p>Không. Bạn tham gia hoàn toàn tự nguyện, không có bất kỳ hoạt động bán hàng nào.</p></details>
+    <details class="reveal"><summary>Học online hay offline?</summary><p>Có cả hai hình thức — online (từ xa) và offline (gặp trực tiếp). Bạn chọn hình thức phù hợp khi đăng ký.</p></details>
+    <details class="reveal"><summary>Mình cần chuẩn bị kiến thức gì trước không?</summary><p>Không cần gì cả. Chỉ cần một trái tim cởi mở và mong muốn tìm câu trả lời cho chính mình.</p></details>
+    <details class="reveal"><summary>Workshop kéo dài bao lâu?</summary><p>Là một buổi ngắn gọn, nhẹ nhàng và dễ theo. Thời gian và lịch cụ thể sẽ được gửi đến bạn sau khi đăng ký.</p></details>
+  </div>
+</section>
+
+<!-- SIGNUP -->
+<section class="signup" id="dangky">
+  <div class="container">
+    <h2 class="reveal">Chương tiếp theo của câu chuyện là của bạn 🌱</h2>
+    <p class="muted reveal narrow">Để lại thông tin, chúng mình sẽ liên hệ và gửi bạn lịch buổi Workshop sớm nhất. Không vội, không áp lực — chỉ là một bước nhỏ cho chính mình.</p>
+
+    <form id="signupForm" onsubmit="return submitForm(event)" class="reveal">
+      <div class="field">
+        <label for="name">Họ và tên <span class="gold">*</span></label>
+        <input type="text" id="name" name="name" placeholder="Nguyễn Văn A" required>
+      </div>
+      <div class="field">
+        <label for="phone">Số điện thoại <span class="gold">*</span></label>
+        <input type="tel" id="phone" name="phone" placeholder="09xx xxx xxx" required>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="email@gmail.com">
+      </div>
+      <div class="field">
+        <label for="address">Địa chỉ</label>
+        <input type="text" id="address" name="address" placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành">
+      </div>
+      <div class="field">
+        <label for="referrer">Người giới thiệu</label>
+        <input type="text" id="referrer" name="referrer" placeholder="Tên người đã giới thiệu bạn (nếu có)">
+      </div>
+      <div class="field">
+        <label for="format">Bạn muốn học theo hình thức nào?</label>
+        <select id="format" name="format">
+          <option value="online">Online (từ xa)</option>
+          <option value="offline">Offline (gặp trực tiếp)</option>
+          <option value="ca-hai">Hình thức nào cũng được</option>
+        </select>
+      </div>
+      <button type="submit" class="btn">Mình muốn tham gia — Đăng ký ngay</button>
+      <span class="btn-sub" style="text-align:center">Thông tin của bạn được bảo mật &amp; chỉ dùng để liên hệ về Workshop.</span>
+    </form>
+
+    <div class="success" id="successMsg">
+      🌟 Cảm ơn bạn đã đăng ký! Mình đã nhận được thông tin và sẽ liên hệ với bạn sớm nhất. Chào mừng bạn đến với hành trình "Bản Thiết Kế Sự Sống".
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p><strong>Workshop "Bản Thiết Kế Sự Sống"</strong> — Miễn phí dành cho người trẻ.</p>
+    <p style="margin-top:8px">Một dự án phi lợi nhuận · Lan toả giá trị tích cực cho cộng đồng 💛</p>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){en.target.classList.add('in'); io.unobserve(en.target);} });
+    },{threshold:0.12});
+    els.forEach(function(e){io.observe(e);});
+  })();
+
+  // ====== DÁN URL APPS SCRIPT WEB APP VÀO ĐÂY ======
+  var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxheHI73VRt-o0P3Iy-LC4xeLh3YJpVOB4UrjZJDydzxzDvAdsHZqoxXxOcAIOJAvGLmw/exec";
+  // ================================================
+
+  function submitForm(e){
+    e.preventDefault();
+    var f = document.getElementById('signupForm');
+    var name  = document.getElementById('name').value.trim();
+    var phone = document.getElementById('phone').value.trim();
+    if(!name || !phone){return false;}
+    var btn = f.querySelector('button[type="submit"]');
+    var btnText = btn.textContent;
+    btn.disabled = true; btn.textContent = "Đang gửi…";
+
+    var payload = {
+      name: name,
+      phone: phone,
+      email: document.getElementById('email').value.trim(),
+      address: document.getElementById('address').value.trim(),
+      referrer: document.getElementById('referrer').value.trim(),
+      format: document.getElementById('format').value
+    };
+
+    function showSuccess(){
+      f.style.display = 'none';
+      var msg = document.getElementById('successMsg');
+      msg.style.display = 'block';
+      msg.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+
+    // Nếu chưa cấu hình URL thì vẫn hiện cảm ơn (để xem thử giao diện)
+    if(!SCRIPT_URL || SCRIPT_URL.indexOf("http") !== 0){ showSuccess(); return false; }
+
+    fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {"Content-Type":"application/x-www-form-urlencoded"},
+      body: new URLSearchParams(payload).toString()
+    })
+    .then(showSuccess)
+    .catch(function(){
+      btn.disabled = false; btn.textContent = btnText;
+      alert("Có lỗi khi gửi thông tin, bạn vui lòng thử lại giúp mình nhé.");
+    });
+    return false;
+  }
+</script>
+</body>
+</html>
